@@ -7,7 +7,7 @@ import java.util.List;
 public interface IClienteService {
 
     public Cliente cadastrarCliente(Cliente novo);
-    public Cliente atualizarCliente(Cliente cliente);
+    public Cliente atualizarCliente(Integer id, Cliente cliente);
     public Cliente recuperarClientePorId(Integer id);
     public Cliente recuperarClientePorTelefone(String telefone);
     public List<Cliente> recuperarTodos();
