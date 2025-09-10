@@ -65,7 +65,7 @@ public class ClienteController {
     public ResponseEntity<Cliente> updateCliente(@RequestBody Cliente cliente, @PathVariable("id") Integer id){
         cliente.setId(id);
         try{
-            Cliente result = clienteService.atualizarCliente(cliente);
+            Cliente result = clienteService.atualizarCliente(id, cliente);
             if(result != null){
                 return ResponseEntity.ok(result);
             }
