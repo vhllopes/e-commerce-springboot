@@ -1,9 +1,7 @@
 package br.com.vitorlopes.ecommerce.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-
 import java.util.List;
 
 @Entity
@@ -13,14 +11,19 @@ public class Produto {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="id_produto")
     private Integer id;
+
     @Column(name="nome_produto",  length=50, nullable=false)
     private String nome;
+
     @Column(name = "descricao_produto", columnDefinition = "TEXT")
     private String descricao;
+
     @Column(name="preco_produto")
     private Double preco;
+
     @Column(name="destaque")
     private Integer destaque;
+
     @Column(name="disponivel")
     private Integer disponibilidade;
 
