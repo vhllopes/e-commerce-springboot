@@ -33,9 +33,6 @@ public class ProdutoServiceImpl implements IProdutoService {
         if(produto.getNome() == null){
             produto.setNome(produtoDoBanco.getNome());
         }
-        if(produto.getNome() == null){
-            produto.setNome(produtoDoBanco.getNome());
-        }
         if(produto.getDescricao() == null){
             produto.setDescricao(produtoDoBanco.getDescricao());
         }

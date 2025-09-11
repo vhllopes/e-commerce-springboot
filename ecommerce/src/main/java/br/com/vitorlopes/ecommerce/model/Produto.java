@@ -1,5 +1,7 @@
 package br.com.vitorlopes.ecommerce.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -26,6 +28,10 @@ public class Produto {
     @JoinTable(name="tbl_categoria_produto", joinColumns = @JoinColumn(name="id_produto"),
             inverseJoinColumns = @JoinColumn(name="id_categoria"))
     private List<Categoria> categorias;
+
+    @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("produto")
+    private List<Variante> variantes;
 
     public Integer getId() {
         return id;
@@ -81,5 +87,13 @@ public class Produto {
 
     public void setCategorias(List<Categoria> categorias) {
         this.categorias = categorias;
+    }
+
+    public List<Variante> getVariantes() {
+        return variantes;
+    }
+
+    public void setVariantes(List<Variante> variantes) {
+        this.variantes = variantes;
     }
 }
