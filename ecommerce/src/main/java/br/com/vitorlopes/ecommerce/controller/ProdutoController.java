@@ -4,6 +4,7 @@ import br.com.vitorlopes.ecommerce.model.Categoria;
 import br.com.vitorlopes.ecommerce.model.Produto;
 import br.com.vitorlopes.ecommerce.service.produto.IProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,8 +27,8 @@ public class ProdutoController {
     private IProdutoService produtoService;
 
     @GetMapping("/produtos")
-    public ResponseEntity<List<Produto>> getAllProdutos(){
-        return ResponseEntity.ok(produtoService.buscarTodosProdutos());
+    public ResponseEntity<Page<Produto>> getAllProdutos(@RequestParam(name="p", defaultValue = "1") int p){
+        return ResponseEntity.ok(produtoService.buscarTodosProdutos(p));
     }
 
     @GetMapping("/produtos/{id}")
