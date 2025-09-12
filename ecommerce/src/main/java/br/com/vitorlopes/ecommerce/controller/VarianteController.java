@@ -12,6 +12,14 @@ import java.util.List;
 
 @RestController
 public class VarianteController {
+    /**
+     *  /variantes/id     GET  -- recuperar pelo ID
+     *  /variantes        POST -- incluir uma nova variante no banco
+     *  /variantes/id     PUT  -- alterar a variante de ID especifico
+     *  /variantes        GET  -- buscar pelo ID da variante
+     *          /variantes?idproduto = xx
+     *
+     * */
     @Autowired
     private IVarianteService service;
 
