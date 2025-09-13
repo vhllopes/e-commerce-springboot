@@ -1,0 +1,36 @@
+package br.com.vitorlopes.ecommerce.security;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import static org.springframework.security.config.Customizer.withDefaults;
+
+@Configuration
+@EnableWebSecurity
+public class MySecurityConfig {
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+                // 1. Configuração do CSRF usando uma lambda
+                .csrf(csrf -> csrf.disable())
+
+                // 2. Configuração das regras de autorização usando uma lambda
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(HttpMethod.GET, "/produtos").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/usuarios").permitAll()
+                        .anyRequest().authenticated()
+                )
+                .cors(withDefaults());
+
+        http.addFilterBefore(new MyECFilter(), UsernamePasswordAuthenticationFilter.class);
+
+        return http.build();
+    }
+
+}
