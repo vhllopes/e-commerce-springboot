@@ -1,6 +1,7 @@
 package br.com.vitorlopes.ecommerce.service.pedido;
 
 import br.com.vitorlopes.ecommerce.dao.PedidoDAO;
+import br.com.vitorlopes.ecommerce.dto.FaturamentoMensal;
 import br.com.vitorlopes.ecommerce.model.ItemPedido;
 import br.com.vitorlopes.ecommerce.model.Pedido;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,4 +52,10 @@ public class PedidoServiceImpl implements IPedidoService{
     public List<Pedido> buscarPorData(Date dataPedido) {
         return dao.findAllByDataPedido(dataPedido);
     }
+
+    @Override
+    public List<FaturamentoMensal> recuperarFaturamento(Integer ano) {
+        return dao.recuperarFaturamento(ano);
+    }
+
 }

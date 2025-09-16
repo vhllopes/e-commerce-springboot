@@ -1,5 +1,6 @@
 package br.com.vitorlopes.ecommerce.controller;
 
+import br.com.vitorlopes.ecommerce.dto.FaturamentoMensal;
 import br.com.vitorlopes.ecommerce.model.Pedido;
 import br.com.vitorlopes.ecommerce.service.pedido.IPedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,5 +84,10 @@ public class PedidoController {
         }
 
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/pedidos/faturamento/{ano}")
+    public ResponseEntity<List<FaturamentoMensal>> getFaturamento(@PathVariable Integer ano){
+        return ResponseEntity.ok(service.recuperarFaturamento(ano));
     }
 }
