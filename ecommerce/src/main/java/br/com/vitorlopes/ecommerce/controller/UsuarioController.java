@@ -1,8 +1,11 @@
 package br.com.vitorlopes.ecommerce.controller;
 
 import br.com.vitorlopes.ecommerce.model.Usuario;
+import br.com.vitorlopes.ecommerce.security.ECToken;
+import br.com.vitorlopes.ecommerce.security.ECTokenUtil;
 import br.com.vitorlopes.ecommerce.service.usuario.IUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,5 +36,14 @@ public class UsuarioController {
             System.out.println("LOG - Erro ao atualizar usuario" + e.getMessage());
         }
         return ResponseEntity.badRequest().body(usuario);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<ECToken> cadastrarUsuario(@RequestBody Usuario usuario) {
+        ECToken token = service.fazerLogin(usuario.getLogin(), usuario.getSenha());
+        if(token != null) {
+            return ResponseEntity.ok(token);
+        }
+        return ResponseEntity.status(403).build();
     }
 }

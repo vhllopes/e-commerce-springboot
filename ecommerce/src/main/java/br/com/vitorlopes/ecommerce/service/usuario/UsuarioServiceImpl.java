@@ -3,6 +3,7 @@ package br.com.vitorlopes.ecommerce.service.usuario;
 import br.com.vitorlopes.ecommerce.dao.UsuarioDAO;
 import br.com.vitorlopes.ecommerce.model.Usuario;
 import br.com.vitorlopes.ecommerce.security.ECToken;
+import br.com.vitorlopes.ecommerce.security.ECTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -77,6 +78,13 @@ public class UsuarioServiceImpl implements IUsuarioService {
 
     @Override
     public ECToken fazerLogin(String login, String senha) {
+        Usuario u = dao.findByLogin(login);
+        if(u!=null){
+            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+            if(encoder.matches(senha, u.getSenha())){
+                return ECTokenUtil.generateToken(u);
+            }
+        }
         return null;
     }
 }

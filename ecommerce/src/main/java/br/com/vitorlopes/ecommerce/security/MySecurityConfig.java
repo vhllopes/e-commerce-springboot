@@ -24,6 +24,7 @@ public class MySecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.GET, "/produtos").permitAll()
                         .requestMatchers(HttpMethod.POST, "/usuarios").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/login").permitAll()
                         .anyRequest().authenticated()
                 )
                 .cors(withDefaults());
